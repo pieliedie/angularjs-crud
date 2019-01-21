@@ -8,7 +8,6 @@
     "update-deps": "npm update",
     "postupdate-deps": "npm run copy-libs",
     "copy-libs": "cpx \"node_modules/{angular,angular-*,bootstrap/dist,jquery/dist}/**/*\" app/lib -C",
-    "prestart": "npm install",
     "start": "http-server ./app -a localhost -p 8000 -c-1"
   },
   "dependencies": {
