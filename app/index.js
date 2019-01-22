@@ -89,7 +89,6 @@ appModule.factory('TodoItemsService', ['$http', function($http) {
   }
 
   function addItem(item) {
-    // $http.post(url, item);
     return $http.post(url, item);
   }
 
