@@ -1,0 +1,21 @@
+body {
+    width: 75vw;
+    margin: 0 auto;
+    padding-top: 10vh;
+}
+
+.form-container {
+    border: 2px solid #f7f7f9;
+    border-radius: 5px;
+}
+
+li {
+    cursor: pointer;
+}
+
+.item-info {
+    display: flex;
+    justify-content: space-between;
+    color: gray;
+    font-weight: lighter;
+}

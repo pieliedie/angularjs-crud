@@ -1,0 +1,16 @@
+{
+  "todolist": [
+    {
+      "id": 1,
+      "content": "The minute you let her under your skin\nThen you begin to make it better",
+      "dateCreated": "Jan 22 19, 1:50:20 pm",
+      "dateModified": "Jan 22 19, 3:14:09 pm"
+    },
+    {
+      "content": "Happiness is a warm gun",
+      "dateCreated": "Jan 22 19, 2:02:56 pm",
+      "id": 2,
+      "dateModified": "Jan 22 19, 2:56:40 pm"
+    }
+  ]
+}

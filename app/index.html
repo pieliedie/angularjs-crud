@@ -1,21 +1,47 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="demoApp">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="style.css" />
     <title>Document</title>
     <script src="lib/jquery/dist/jquery.js"></script>
     <script src="lib/angular/angular.js"></script>
-    <script src="lib/angular-animate/angular-animate.js"></script>
-    <script src="lib/angular-resource/angular-resource.js"></script>
-    <script src="lib/angular-route/angular-route.js"></script>
-    <script src="app.module.js"></script>
+    <script src="index.js"></script>
+    <script src="lib/moment/moment.js"></script>
 </head>
-<body>
-    <div>
-        <app-dashboard></app-dashboard>
-    </div>
+<body ng-app="myApp">
+    <main ng-controller="ItemsController as controller" class="row">
+        <aside class="form-container col-xs-1 col-sm-4 col-md-5 mb-1">
+            <form ng-submit="controller.submitItem()" id="todo-form">
+                <div class="form-group">
+                    <label for="itemId">ID</label>
+                    <input type="text" name="itemId" class="form-control" disabled ng-model="item.id">
+                </div>
+                <div class="form-group">
+                    <label for="todoContent">Content</label>
+                    <textarea name="todoContent" class="form-control" form="todo-form" cols="25" rows="5" ng-model="item.content">
+                    </textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+                
+            </form>
+        </aside>
+        <aside class="items-container col-xs-1 col-sm-8 col-md-6 offset-md-1">
+            <ul class="list-group">
+                <li ng-repeat = "item in items" ng-click="controller.fetchItem(item.id)" class="list-group-item list-group-item-action">
+                    <h3>{{item.content}}</h3>
+                    <div class="item-info">
+                        <p>Created at: {{item.dateCreated}}</p>
+                        <p>Updated at: {{item.dateModified}}</p>
+                    </div>
+                </li>
+            </ul>
+        </aside>
+    </main>
 </body>
 </html>
