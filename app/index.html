@@ -34,11 +34,12 @@
         <aside class="items-container col-xs-1 col-sm-8 col-md-6 offset-md-1">
             <ul class="list-group">
                 <li ng-repeat = "item in items" ng-click="controller.fetchItem(item.id)" class="list-group-item list-group-item-action">
-                    <h3>{{item.content}}</h3>
+                    <pre>{{item.content}}</pre>
                     <div class="item-info">
                         <p>Created at: {{item.dateCreated}}</p>
-                        <p>Updated at: {{item.dateModified}}</p>
+                        <p ng-if="item.dateModified">Updated at: {{item.dateModified}}</p>
                     </div>
+                    <button class="btn btn-danger delete-button" ng-click="controller.removeItem(item.id)">Delete</button>
                 </li>
             </ul>
         </aside>

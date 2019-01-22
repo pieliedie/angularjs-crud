@@ -2,19 +2,18 @@ var appModule = angular.module('myApp', []);
 
 appModule.controller('ItemsController', ['$scope', 'TodoItemsService', function($scope, TodoItemsService){
   var self = this;
-  $scope.item = {id: null, content: null, dateCreated: null, dateModified: null};
+  $scope.item = {};
   self.submitItem = submitItem;
   self.addItem = addItem;
   self.updateItem = updateItem;
   self.fetchItem = fetchItem;
+  self.removeItem = removeItem;
   fetchAllItems();
   
   function fetchItem(id) {
-    TodoItemsService.fetchItem(id).then(function(res){
-      if(res && res.data) {
-        $scope.item = res.data;
-      }
-    });
+    $scope.item = $scope.items.find(function(item){
+      return item.id === id;
+    }) || {};
   }
 
   function fetchAllItems() {
@@ -26,7 +25,7 @@ appModule.controller('ItemsController', ['$scope', 'TodoItemsService', function(
   }
 
   function addItem(item) {
-    TodoItemsService.addItem(item).then(function(res){
+    TodoItemsService.addItem(item).then(function(){
       console.log("POST successfully");
       reset();
     });
@@ -48,11 +47,16 @@ appModule.controller('ItemsController', ['$scope', 'TodoItemsService', function(
 
   function submitItem() {
     if(!$scope.item.id) {
+      console.log(1);
+      
       $scope.item.dateCreated = moment().format("MMM DD YY, h:mm:ss a");
-      $scope.item.id = Math.floor(Math.random()) * 10;
+      console.log($scope.item);
+      
       addItem($scope.item);
     }
     else {
+      console.log(2);
+      
       $scope.item.dateModified = moment().format("MMM DD YY, h:mm:ss a");
       updateItem($scope.item);
     }
@@ -72,7 +76,8 @@ appModule.factory('TodoItemsService', ['$http', function($http) {
     fetchAll: fetchAllItems,
     fetchItem: fetchItem,
     addItem: addItem,
-    updateItem: updateItem
+    updateItem: updateItem,
+    removeItem: removeItem
   }
 
   function fetchAllItems() {
@@ -84,8 +89,8 @@ appModule.factory('TodoItemsService', ['$http', function($http) {
   }
 
   function addItem(item) {
-    $http.post(url, item, { headers: {"Content-Type": "application/json"}});
-    // return $http.post(url, item);
+    // $http.post(url, item);
+    return $http.post(url, item);
   }
 
   function updateItem(item) {
